@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080b10">
+  <title>作品影片｜红薏米&柚信使</title>
+  <style>
+    :root{--bg:#080b10;--panel:#10161e;--line:#28313c;--text:#f3f5f7;--muted:#8995a1;--red:#b72e2e}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;min-height:100vh}
+    .wrap{width:min(1100px,calc(100vw - 32px));margin:0 auto;padding:32px 0 56px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}
+    .back{display:inline-flex;align-items:center;gap:8px;color:#d7dde3;font-size:14px}.brand{font-size:13px;color:#8e99a5;letter-spacing:.08em}
+    .player{background:#000;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.35)}video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+    .info{padding:24px 2px 0}.eyebrow{font-size:11px;letter-spacing:.18em;color:#b59a68;font-weight:700}.info h1{font-size:clamp(28px,5vw,52px);line-height:1.08;margin:8px 0 10px}.info p{margin:0;color:var(--muted);font-size:14px}
+    .missing{display:none;place-items:center;min-height:58vh;text-align:center;color:var(--muted)}.missing strong{display:block;color:#fff;font-size:28px;margin-bottom:10px}
+    @media(max-width:640px){.wrap{width:min(100% - 22px,1100px);padding-top:20px}.top{margin-bottom:16px}.brand{display:none}.player{border-radius:12px}.info{padding-top:18px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="top"><a class="back" href="./index.html#portfolio">← 返回公司介绍</a><span class="brand">红薏米&柚信使</span></div>
+    <section id="content">
+      <div class="player"><video id="video" controls playsinline preload="metadata"></video></div>
+      <div class="info"><span class="eyebrow">PROJECT VIDEO</span><h1 id="title">作品影片</h1><p>点击播放键观看项目影片。</p></div>
+    </section>
+    <section class="missing" id="missing"><div><strong>影片尚未上线</strong><span>请返回公司介绍页查看其他项目。</span></div></section>
+  </main>
+  <script>
+    const projects={
+      jiaqing:{title:'《嘉庆君游台湾》',src:'assets/video/video_jiaqing.mp4',poster:'assets/ip/ip_jiaqing_cover.webp'},
+      wuhan:{title:'武汉方言系列',src:'assets/video/video_wuhan_dialect.mp4',poster:'assets/ip/ip_wuhan_dialect_cover.webp'},
+      chen:{title:'《开漳圣王 陈元光》',src:'assets/video/video_chen_yuangguang.mp4',poster:'assets/ip/ip_chen_yuangguang_cover.webp'}
+    };
+    const key=new URLSearchParams(location.search).get('project');
+    const item=projects[key];
+    const content=document.querySelector('#content');
+    const missing=document.querySelector('#missing');
+    if(item){
+      document.title=`${item.title}｜红薏米&柚信使`;
+      document.querySelector('#title').textContent=item.title;
+      const video=document.querySelector('#video');
+      video.src=item.src;
+      video.poster=item.poster;
+    }else{
+      content.style.display='none';
+      missing.style.display='grid';
+    }
+  </script>
+</body>
+</html>
