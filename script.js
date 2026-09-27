@@ -1,4 +1,5 @@
 const body = document.body;
+const header = document.querySelector('.site-header');
 const toggle = document.querySelector('.menu-toggle');
 const panel = document.querySelector('.mobile-panel');
 
@@ -15,29 +16,33 @@ toggle?.addEventListener('click', () => {
   panel?.setAttribute('aria-hidden', String(!open));
 });
 
-document.querySelectorAll('.mobile-panel a').forEach((link) => link.addEventListener('click', closeMenu));
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-const toast = document.querySelector('.toast');
-let toastTimer;
-document.querySelectorAll('[data-video-placeholder]').forEach((button) => {
-  button.addEventListener('click', () => {
-    toast?.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast?.classList.remove('show'), 1800);
-  });
+document.querySelectorAll('.mobile-panel a').forEach((link) => {
+  link.addEventListener('click', closeMenu);
 });
 
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (reducedMotion) {
+  document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+} else {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px' });
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+}
+
+function updateHeader() {
+  header?.classList.toggle('is-scrolled', window.scrollY > 24);
+}
+
+updateHeader();
+window.addEventListener('scroll', updateHeader, { passive: true });
 window.addEventListener('resize', () => {
-  if (window.innerWidth > 820) closeMenu();
+  if (window.innerWidth > 980) closeMenu();
 });
