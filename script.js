@@ -12,18 +12,15 @@ function installCopyrightSection() {
   section.className = 'copyright-assets section-dark';
   section.id = 'copyright';
 
-  const cards = Array.from({ length: 15 }, (_, index) => {
+  const cards = Array.from({ length: 16 }, (_, index) => {
     const number = String(index + 1).padStart(2, '0');
-    if (index === 0) {
-      return `<button class="cert-card cert-card-real" type="button" data-cert-zoom aria-label="放大查看版权证书 01">
-        <div class="cert-image cert-image-real" role="img" aria-label="作品登记证书示例"></div>
-        <div class="cert-meta"><b>版权证书 01</b><span>作品登记证书 · 已确权</span></div>
-      </button>`;
-    }
-    return `<article class="cert-card cert-placeholder">
-      <div class="cert-placeholder-art"><span>版权证书</span><strong>${number}</strong><small>CERTIFICATE PLACEHOLDER</small></div>
-      <div class="cert-meta"><b>版权证书 ${number}</b><span>待替换正式证书图</span></div>
-    </article>`;
+    const imagePath = `assets/copyright/copyright_${number}.webp`;
+    return `<button class="cert-card cert-card-real" type="button" data-cert-zoom data-cert-src="${imagePath}" data-cert-number="${number}" aria-label="放大查看版权证书 ${number}">
+      <div class="cert-image">
+        <img src="${imagePath}" alt="版权证书 ${number}" loading="lazy" decoding="async">
+      </div>
+      <div class="cert-meta"><b>版权证书 ${number}</b><span>作品登记证书 · 已确权</span></div>
+    </button>`;
   }).join('');
 
   section.innerHTML = `
@@ -42,15 +39,15 @@ function installCopyrightSection() {
       </div>
       <div class="certificate-head reveal">
         <div><span>ASSET PROOF</span><h3>部分著作权证书展示</h3></div>
-        <p>首批展示 15 项证书资产。后续可持续补充完整版权档案。</p>
+        <p>首批展示 16 项证书资产。后续可持续补充完整版权档案。</p>
       </div>
       <div class="certificate-grid reveal">${cards}</div>
     </div>
     <div class="certificate-modal" aria-hidden="true">
       <button class="certificate-modal-close" type="button" aria-label="关闭证书大图">×</button>
       <div class="certificate-modal-inner">
-        <div class="certificate-modal-image cert-image-real" role="img" aria-label="作品登记证书大图"></div>
-        <p>作品登记证书 · 版权资产示例</p>
+        <img class="certificate-modal-image" src="" alt="版权证书大图">
+        <p class="certificate-modal-caption">作品登记证书 · 已确权</p>
       </div>
     </div>`;
 
@@ -65,17 +62,30 @@ function installCopyrightSection() {
   });
 
   const modal = section.querySelector('.certificate-modal');
-  const openModal = () => {
-    modal?.classList.add('is-open');
-    modal?.setAttribute('aria-hidden', 'false');
+  const modalImage = section.querySelector('.certificate-modal-image');
+  const modalCaption = section.querySelector('.certificate-modal-caption');
+
+  const openModal = (card) => {
+    const src = card?.dataset.certSrc;
+    const number = card?.dataset.certNumber;
+    if (!src || !modal || !modalImage) return;
+    modalImage.src = src;
+    modalImage.alt = `版权证书 ${number || ''}`.trim();
+    if (modalCaption) modalCaption.textContent = `版权证书 ${number || ''} · 已确权`.trim();
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
     body.classList.add('modal-open');
   };
+
   const closeModal = () => {
     modal?.classList.remove('is-open');
     modal?.setAttribute('aria-hidden', 'true');
     body.classList.remove('modal-open');
   };
-  section.querySelector('[data-cert-zoom]')?.addEventListener('click', openModal);
+
+  section.querySelectorAll('[data-cert-zoom]').forEach((card) => {
+    card.addEventListener('click', () => openModal(card));
+  });
   section.querySelector('.certificate-modal-close')?.addEventListener('click', closeModal);
   modal?.addEventListener('click', (event) => {
     if (event.target === modal) closeModal();
