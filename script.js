@@ -8,46 +8,116 @@ document.title = '红薏米&柚信使｜公司介绍';
 const heroTitle = document.querySelector('.hero h1');
 if (heroTitle) heroTitle.innerHTML = '红薏米&柚信使<br /><span>公司介绍</span>';
 
+function setRealImage(slot, src, alt, ratio, objectPosition = 'center') {
+  if (!slot) return;
+  slot.innerHTML = `<img src="${src}" alt="${alt}" loading="lazy" decoding="async">`;
+  slot.style.minHeight = '0';
+  slot.style.aspectRatio = ratio;
+  slot.style.overflow = 'hidden';
+  slot.style.border = '0';
+  slot.style.background = '#11161d';
+  slot.style.position = 'relative';
+  const image = slot.querySelector('img');
+  if (image) {
+    image.style.width = '100%';
+    image.style.height = '100%';
+    image.style.display = 'block';
+    image.style.objectFit = 'cover';
+    image.style.objectPosition = objectPosition;
+  }
+}
+
+function installSiteImages() {
+  const heroBox = document.querySelector('.hero-system');
+  if (heroBox) {
+    heroBox.innerHTML = '<img src="assets/brand/brand_hero_main.webp" alt="红薏米与柚信使公司主视觉" decoding="async">';
+    heroBox.style.padding = '0';
+    heroBox.style.overflow = 'hidden';
+    heroBox.style.minHeight = '0';
+    heroBox.style.aspectRatio = '16 / 9';
+    const heroImage = heroBox.querySelector('img');
+    if (heroImage) {
+      heroImage.style.width = '100%';
+      heroImage.style.height = '100%';
+      heroImage.style.display = 'block';
+      heroImage.style.objectFit = 'cover';
+      heroImage.style.objectPosition = 'center';
+    }
+  }
+
+  const tractionImages = document.querySelectorAll('.traction-panel .media-placeholder.wide');
+  setRealImage(tractionImages[0], 'assets/cases/case_gov_project.webp', '政企与两岸项目案例', '3 / 2');
+  setRealImage(tractionImages[1], 'assets/cases/case_ip_products.webp', 'IP商业化与文创产品案例', '3 / 2');
+
+  const portraits = document.querySelectorAll('.leader-card .media-placeholder.portrait');
+  setRealImage(portraits[0], 'assets/team/team_xue_yingzhong.webp', '薛颖穜', '3 / 4', 'center top');
+  setRealImage(portraits[1], 'assets/team/team_zha_gang.webp', '查钢', '3 / 4', 'center top');
+}
+
+installSiteImages();
+
+function enableProjectVideoLink(slot, projectKey, label) {
+  if (!slot) return;
+  slot.setAttribute('role', 'link');
+  slot.setAttribute('tabindex', '0');
+  slot.setAttribute('aria-label', `${label}，点击观看影片`);
+  slot.style.cursor = 'pointer';
+
+  const badge = document.createElement('span');
+  badge.textContent = '▶';
+  badge.setAttribute('aria-hidden', 'true');
+  badge.style.position = 'absolute';
+  badge.style.right = '16px';
+  badge.style.bottom = '16px';
+  badge.style.width = '46px';
+  badge.style.height = '46px';
+  badge.style.borderRadius = '50%';
+  badge.style.display = 'grid';
+  badge.style.placeItems = 'center';
+  badge.style.background = 'rgba(183,46,46,.94)';
+  badge.style.color = '#fff';
+  badge.style.fontSize = '16px';
+  badge.style.boxShadow = '0 10px 26px rgba(0,0,0,.28)';
+  badge.style.pointerEvents = 'none';
+  slot.appendChild(badge);
+
+  const openVideo = () => {
+    window.location.href = `video.html?project=${projectKey}`;
+  };
+  slot.addEventListener('click', openVideo);
+  slot.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openVideo();
+    }
+  });
+}
+
 function installPortfolioImages() {
   const portfolio = document.querySelector('#portfolio');
   if (!portfolio) return;
 
-  const makeImage = (slot, src, alt, ratio) => {
-    if (!slot) return;
-    slot.innerHTML = `<img src="${src}" alt="${alt}" loading="lazy" decoding="async">`;
-    slot.style.minHeight = '0';
-    slot.style.aspectRatio = ratio;
-    slot.style.overflow = 'hidden';
-    slot.style.border = '0';
-    slot.style.background = '#dce1e5';
-    const image = slot.querySelector('img');
-    if (image) {
-      image.style.width = '100%';
-      image.style.height = '100%';
-      image.style.display = 'block';
-      image.style.objectFit = 'cover';
-      image.style.objectPosition = 'center';
-    }
-  };
-
-  makeImage(
-    portfolio.querySelector('.portfolio-feature .media-placeholder.large'),
+  const featureSlot = portfolio.querySelector('.portfolio-feature .media-placeholder.large');
+  setRealImage(
+    featureSlot,
     'assets/ip/ip_jiaqing_cover.webp',
     '《嘉庆君游台湾》主视觉',
     '3 / 2'
   );
+  enableProjectVideoLink(featureSlot, 'jiaqing', '《嘉庆君游台湾》');
 
   const cardImages = [
-    ['assets/ip/ip_wuhan_dialect_cover.webp', '武汉方言系列'],
-    ['assets/ip/ip_chen_yuangguang_cover.webp', '《开漳圣王 陈元光》'],
-    ['assets/ip/ip_zheng_chenggong_cover.webp', '《郑成功 潮武王》'],
-    ['assets/ip/ip_youxinshi_cover.webp', '《柚信使》']
+    ['assets/ip/ip_wuhan_dialect_cover.webp', '武汉方言系列', 'wuhan'],
+    ['assets/ip/ip_chen_yuangguang_cover.webp', '《开漳圣王 陈元光》', 'chen'],
+    ['assets/ip/ip_zheng_chenggong_cover.webp', '《郑成功 潮武王》', null],
+    ['assets/ip/ip_youxinshi_cover.webp', '《柚信使》', null]
   ];
 
   portfolio.querySelectorAll('.asset-card .media-placeholder').forEach((slot, index) => {
     const item = cardImages[index];
     if (!item) return;
-    makeImage(slot, item[0], item[1], '5 / 4');
+    setRealImage(slot, item[0], item[1], '5 / 4');
+    if (item[2]) enableProjectVideoLink(slot, item[2], item[1]);
   });
 }
 
