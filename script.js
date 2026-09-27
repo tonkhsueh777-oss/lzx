@@ -8,6 +8,51 @@ document.title = '红薏米&柚信使｜公司介绍';
 const heroTitle = document.querySelector('.hero h1');
 if (heroTitle) heroTitle.innerHTML = '红薏米&柚信使<br /><span>公司介绍</span>';
 
+function installPortfolioImages() {
+  const portfolio = document.querySelector('#portfolio');
+  if (!portfolio) return;
+
+  const makeImage = (slot, src, alt, ratio) => {
+    if (!slot) return;
+    slot.innerHTML = `<img src="${src}" alt="${alt}" loading="lazy" decoding="async">`;
+    slot.style.minHeight = '0';
+    slot.style.aspectRatio = ratio;
+    slot.style.overflow = 'hidden';
+    slot.style.border = '0';
+    slot.style.background = '#dce1e5';
+    const image = slot.querySelector('img');
+    if (image) {
+      image.style.width = '100%';
+      image.style.height = '100%';
+      image.style.display = 'block';
+      image.style.objectFit = 'cover';
+      image.style.objectPosition = 'center';
+    }
+  };
+
+  makeImage(
+    portfolio.querySelector('.portfolio-feature .media-placeholder.large'),
+    'assets/ip/ip_jiaqing_cover.webp',
+    '《嘉庆君游台湾》主视觉',
+    '3 / 2'
+  );
+
+  const cardImages = [
+    ['assets/ip/ip_wuhan_dialect_cover.webp', '武汉方言系列'],
+    ['assets/ip/ip_chen_yuangguang_cover.webp', '《开漳圣王 陈元光》'],
+    ['assets/ip/ip_zheng_chenggong_cover.webp', '《郑成功 潮武王》'],
+    ['assets/ip/ip_youxinshi_cover.webp', '《柚信使》']
+  ];
+
+  portfolio.querySelectorAll('.asset-card .media-placeholder').forEach((slot, index) => {
+    const item = cardImages[index];
+    if (!item) return;
+    makeImage(slot, item[0], item[1], '5 / 4');
+  });
+}
+
+installPortfolioImages();
+
 function installCopyrightSection() {
   const portfolio = document.querySelector('#portfolio');
   const traction = document.querySelector('#traction');
