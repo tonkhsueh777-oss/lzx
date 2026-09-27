@@ -1,0 +1,12 @@
+/* V2.2 — Real copyright certificates */
+.certificate-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px!important}
+.cert-card{cursor:pointer!important}
+.cert-image{aspect-ratio:4/3!important;overflow:hidden!important;background:#ece6d3!important;border-bottom:1px solid #2b3540!important}
+.cert-image img{display:block;width:100%;height:100%;object-fit:cover}
+.cert-meta{padding:14px 14px 16px}
+.cert-meta b{display:block;color:#fff;font-size:13px;margin-bottom:6px}
+.cert-meta span{display:block;color:#7f8b96;font-size:11px}
+.certificate-modal-inner{max-width:min(1100px,92vw)!important}
+.certificate-modal-image{display:block!important;width:100%!important;max-height:82vh!important;height:auto!important;object-fit:contain!important;background:#f2eddc!important;border-radius:8px!important}
+.certificate-modal-caption{margin:12px 0 0!important;color:#d7dde2!important;text-align:center!important}
+@media (max-width:900px){.certificate-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.certificate-head{align-items:flex-start!important;flex-direction:column!important;gap:10px!important}}
