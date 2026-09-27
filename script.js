@@ -4,10 +4,9 @@ const toggle = document.querySelector('.menu-toggle');
 const panel = document.querySelector('.mobile-panel');
 
 // Homepage title — company introduction
-// Keep the existing investment-oriented content and subtitle unchanged.
-document.title = '红薏米 × 柚信使｜公司介绍';
+document.title = '红薏米&柚信使｜公司介绍';
 const heroTitle = document.querySelector('.hero h1');
-if (heroTitle) heroTitle.innerHTML = '公司<br /><span>介绍</span>';
+if (heroTitle) heroTitle.innerHTML = '红薏米&柚信使<br /><span>公司介绍</span>';
 
 function installCopyrightSection() {
   const portfolio = document.querySelector('#portfolio');
