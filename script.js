@@ -109,8 +109,8 @@ function installPortfolioImages() {
   const cardImages = [
     ['assets/ip/ip_wuhan_dialect_cover.webp', '武汉方言系列', 'wuhan'],
     ['assets/ip/ip_chen_yuangguang_cover.webp', '《开漳圣王 陈元光》', 'chen'],
-    ['assets/ip/ip_zheng_chenggong_cover.webp', '《郑成功 潮武王》', null],
-    ['assets/ip/ip_youxinshi_cover.webp', '《柚信使》', null]
+    ['assets/ip/ip_zheng_chenggong_cover.webp', '《郑成功 潮武王》', 'zheng'],
+    ['assets/ip/ip_youxinshi_cover.webp', '《柚信使》', 'youxinshi']
   ];
 
   portfolio.querySelectorAll('.asset-card .media-placeholder').forEach((slot, index) => {
