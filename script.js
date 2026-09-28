@@ -148,12 +148,12 @@ function installCopyrightSection() {
       <div class="copyright-hero reveal">
         <div class="copyright-stat">
           <span class="eyebrow light">COPYRIGHT ASSETS</span>
-          <strong>40+</strong>
+          <strong>50+</strong>
           <small>已取得著作权证书</small>
         </div>
         <div class="copyright-copy">
           <h2>版权资产沉淀</h2>
-          <p>累计取得 40 余项著作权证书，全部 IP 具备完整可商用版权，形成可持续内容开发、IP 授权、品牌联名与商业变现的核心数字资产。</p>
+          <p>累计取得 50 余项著作权证书，全部 IP 具备完整可商用版权，形成可持续内容开发、IP 授权、品牌联名与商业变现的核心数字资产。</p>
           <div class="copyright-tags"><span>原创确权</span><span>可商用</span><span>可授权</span><span>可持续开发</span></div>
         </div>
       </div>
