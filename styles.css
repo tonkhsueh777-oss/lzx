@@ -5,3 +5,16 @@
 @import url('./styles-5.css');
 @import url('./styles-6.css');
 @import url('./styles-7.css');
+
+/* Sync homepage copyright metric with current 50+ count */
+.hero-metrics article:first-child strong{
+  font-size:0;
+}
+.hero-metrics article:first-child strong::after{
+  content:'50+';
+  font-size:31px;
+  line-height:1;
+}
+@media(max-width:640px){
+  .hero-metrics article:first-child strong::after{font-size:28px;}
+}
