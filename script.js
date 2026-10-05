@@ -263,10 +263,10 @@ window.addEventListener('resize', () => {
 
 // Load company news and persistent visitor counter after the core page is ready.
 const companyNewsLoader = document.createElement('script');
-companyNewsLoader.src = './news-data.js';
+companyNewsLoader.src = './news-data.js?v=news-images-20261005';
 companyNewsLoader.addEventListener('load', () => {
   const extrasLoader = document.createElement('script');
-  extrasLoader.src = './extras.js';
+  extrasLoader.src = './extras.js?v=news-images-20261005';
   document.body.appendChild(extrasLoader);
 });
 document.body.appendChild(companyNewsLoader);

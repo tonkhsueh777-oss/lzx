@@ -1,9 +1,3 @@
-function newsSpriteStyle(data, item) {
-  const x = item.col === 0 ? '0%' : item.col === 1 ? '50%' : '100%';
-  const y = item.row === 0 ? '0%' : item.row === 1 ? '33.333%' : item.row === 2 ? '66.667%' : '100%';
-  return `background-image:url("${data.sprite}");background-size:300% 400%;background-position:${x} ${y};`;
-}
-
 function installCompanyNewsSection() {
   const data = window.COMPANY_NEWS;
   const team = document.querySelector('#team');
@@ -12,7 +6,7 @@ function installCompanyNewsSection() {
   const featured = data.items.find((item) => item.featured) || data.items[0];
   const cards = data.items.filter((item) => item !== featured).map((item) => `
     <article class="news-card">
-      <div class="news-card-image" style='${newsSpriteStyle(data, item)}' role="img" aria-label="${item.title}"></div>
+      <img class="news-card-image" src="${item.image}" alt="${item.title}" loading="lazy" decoding="async">
       <div class="news-card-body">
         <div class="news-meta"><time>${item.date}</time><span>${item.type}</span></div>
         <h3>${item.title}</h3>
@@ -31,7 +25,7 @@ function installCompanyNewsSection() {
       </div>
 
       <article class="news-featured reveal is-visible">
-        <div class="news-featured-image" style='${newsSpriteStyle(data, featured)}' role="img" aria-label="${featured.title}"></div>
+        <img class="news-featured-image" src="${featured.image}" alt="${featured.title}" decoding="async">
         <div class="news-featured-copy">
           <div class="news-meta"><time>${featured.date}</time><span>${featured.type}</span></div>
           <span class="news-featured-label">FEATURED NEWS</span>
