@@ -30,19 +30,8 @@ function setRealImage(slot, src, alt, ratio, objectPosition = 'center') {
 function installSiteImages() {
   const heroBox = document.querySelector('.hero-system');
   if (heroBox) {
-    heroBox.innerHTML = '<img src="assets/brand/brand_hero_main.webp" alt="红薏米与柚信使公司主视觉" decoding="async">';
-    heroBox.style.padding = '0';
-    heroBox.style.overflow = 'hidden';
-    heroBox.style.minHeight = '0';
-    heroBox.style.aspectRatio = '16 / 9';
-    const heroImage = heroBox.querySelector('img');
-    if (heroImage) {
-      heroImage.style.width = '100%';
-      heroImage.style.height = '100%';
-      heroImage.style.display = 'block';
-      heroImage.style.objectFit = 'cover';
-      heroImage.style.objectPosition = 'center';
-    }
+    heroBox.remove();
+    document.querySelector('.hero-layout')?.style.setProperty('grid-template-columns', '1fr');
   }
 
   const tractionImages = document.querySelectorAll('.traction-panel .media-placeholder.wide');
