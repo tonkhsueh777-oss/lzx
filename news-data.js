@@ -11,7 +11,7 @@ window.COMPANY_NEWS={
     {"date":"2023.07","type":"两岸交流","title":"举办两岸青年读书会","text":"以文化内容为媒介，打造两岸青年交流活动与线下社群连接。","image":"assets/news/news_09.webp"},
     {"date":"2023.04","type":"政企交流","title":"参与武汉创新创业交流活动","text":"在地方创新创业平台建立合作连接，强化项目资源与产业协同。","image":"assets/news/news_10.webp"},
     {"date":"项目活动","type":"内容项目","title":"《梦里杜鹃花》相关活动","text":"围绕原创影视内容项目开展线下交流与传播活动，延伸项目影响力。","image":"assets/news/news_11.webp"},
-    {"date":"2023.02","type":"公司动态","title":"公司空间参访交流","text":"通过现场参访与交流，分享公司文化内容与文创项目实践。","image":"assets/news/news_12.webp"},
-    {"date":"2024.07","type":"两岸交流","title":"参加2024两岸青年峰会","text":"参与两岸青年峰会活动，围绕青年交流与文化传播展开分享。","image":"assets/news/news_13.webp"}
+    {"date":"2023.02","type":"公司动态","title":"公司空间参访交流","text":"通过现场参访与交流，分享公司文化内容与文创项目实践。","image":"assets/news/news_12.webp?v=2"},
+    {"date":"2024.07","type":"两岸交流","title":"参加2024两岸青年峰会","text":"参与两岸青年峰会活动，围绕青年交流与文化传播展开分享。","image":"assets/news/news_13.webp?v=2"}
   ]
 };
