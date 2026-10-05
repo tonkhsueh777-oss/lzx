@@ -1,12 +1,23 @@
+function newsSpriteStyle(data, item) {
+  const x = item.col === 0 ? '0%' : item.col === 1 ? '50%' : '100%';
+  const y = item.row === 0 ? '0%' : item.row === 1 ? '33.333%' : item.row === 2 ? '66.667%' : '100%';
+  return `background-image:url("${data.sprite}");background-size:300% 400%;background-position:${x} ${y};`;
+}
+
 function installCompanyNewsSection() {
   const data = window.COMPANY_NEWS;
   const team = document.querySelector('#team');
-  if (!data || !team || document.querySelector('#news')) return;
+  if (!data?.items?.length || !team || document.querySelector('#news')) return;
 
-  const items = data.items.map((item) => `
-    <article class="news-item">
-      <div class="news-meta"><time>${item.date}</time><span>${item.type}</span></div>
-      <div><h3>${item.title}</h3><p>${item.text}</p></div>
+  const featured = data.items.find((item) => item.featured) || data.items[0];
+  const cards = data.items.filter((item) => item !== featured).map((item) => `
+    <article class="news-card">
+      <div class="news-card-image" style='${newsSpriteStyle(data, item)}' role="img" aria-label="${item.title}"></div>
+      <div class="news-card-body">
+        <div class="news-meta"><time>${item.date}</time><span>${item.type}</span></div>
+        <h3>${item.title}</h3>
+        <p>${item.text}</p>
+      </div>
     </article>`).join('');
 
   const section = document.createElement('section');
@@ -15,16 +26,21 @@ function installCompanyNewsSection() {
   section.innerHTML = `
     <div class="container">
       <div class="section-title-row reveal is-visible">
-        <div><span class="eyebrow">COMPANY NEWS</span><h2>公司新闻与媒体动态</h2></div>
-        <p>精选最能体现公司媒体影响力、两岸交流网络与文化内容实践的公开活动与报道。</p>
+        <div><span class="eyebrow">COMPANY NEWS</span><h2>公司新闻</h2></div>
+        <p>记录红薏米 × 柚信使在媒体报道、两岸交流、项目落地与产业合作中的阶段成果。</p>
       </div>
-      <div class="news-layout reveal is-visible">
-        <figure class="news-visual">
-          <img src="${data.collage}" alt="红薏米与柚信使公司新闻精选现场" loading="lazy" decoding="async">
-          <figcaption>媒体报道 · 两岸青年交流 · 峰会采访</figcaption>
-        </figure>
-        <div class="news-list">${items}</div>
-      </div>
+
+      <article class="news-featured reveal is-visible">
+        <div class="news-featured-image" style='${newsSpriteStyle(data, featured)}' role="img" aria-label="${featured.title}"></div>
+        <div class="news-featured-copy">
+          <div class="news-meta"><time>${featured.date}</time><span>${featured.type}</span></div>
+          <span class="news-featured-label">FEATURED NEWS</span>
+          <h3>${featured.title}</h3>
+          <p>${featured.text}</p>
+        </div>
+      </article>
+
+      <div class="news-grid reveal is-visible">${cards}</div>
     </div>`;
 
   team.parentNode.insertBefore(section, team);
