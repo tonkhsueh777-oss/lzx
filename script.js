@@ -260,3 +260,13 @@ window.addEventListener('scroll', updateHeader, { passive: true });
 window.addEventListener('resize', () => {
   if (window.innerWidth > 980) closeMenu();
 });
+
+// Load company news and persistent visitor counter after the core page is ready.
+const companyNewsLoader = document.createElement('script');
+companyNewsLoader.src = './news-data.js';
+companyNewsLoader.addEventListener('load', () => {
+  const extrasLoader = document.createElement('script');
+  extrasLoader.src = './extras.js';
+  document.body.appendChild(extrasLoader);
+});
+document.body.appendChild(companyNewsLoader);
